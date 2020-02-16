@@ -3,7 +3,6 @@ package tokenizer
 import (
 	"sync"
 
-	//"github.com/tukdesk/sego"
 	"github.com/huichen/sego"
 )
 
@@ -21,9 +20,6 @@ func getSegoSegmenter(dictFiles string) (*sego.Segmenter, error) {
 	}
 
 	segmenter := new(sego.Segmenter)
-	//if err := segmenter.LoadDictionary(dictFiles); err != nil {
-	//	return nil, err
-	//}
 	segmenter.LoadDictionary(dictFiles)
 
 	dictSegmenterMap[dictFiles] = segmenter

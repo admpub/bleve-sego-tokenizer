@@ -5927,7 +5927,7 @@ func TestSegoTokenizerSearchModeWithCaseSensitive(t *testing.T) {
 		},
 	}
 
-	tokenizer, _ := NewSegoTokenizer("dict.txt", true, true)
+	tokenizer, _ := NewSegoTokenizer("dict.txt", true)
 	for _, test := range tests {
 		actual := tokenizer.Tokenize(test.input)
 		if !reflect.DeepEqual(actual, test.output) {

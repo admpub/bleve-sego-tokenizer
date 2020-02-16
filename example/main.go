@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/blevesearch/bleve"
-	//sego "github.com/tukdesk/bleve-sego-tokenizer"
-	sego "github.com/xiaomi-tc/bleve-sego-tokenizer"
+
+	sego "github.com/admpub/bleve-sego-tokenizer"
 )
 
 func main() {
@@ -26,14 +26,8 @@ func main() {
 	// create a custom analyzer
 	err = indexMapping.AddCustomAnalyzer("sego",
 		map[string]interface{}{
-			//"type":      "custom",
 			"type":      sego.Name,
 			"tokenizer": sego.Name,
-			//"token_filters": []string{
-			//	"possessive_en",
-			//	"to_lower",
-			//	"stop_en",
-			//},
 		})
 
 	if err != nil {
@@ -75,15 +69,15 @@ func main() {
 		},
 		{
 			Title: "Doc 6",
-			Name: "富士康小时工周薪薪",
+			Name:  "富士康小时工周薪薪",
 		},
 		{
 			Title: "Doc 7",
-			Name: "富康小时周薪",
+			Name:  "富康小时周薪",
 		},
 		{
 			Title: "Doc 8",
-			Name: "富小周",
+			Name:  "富小周",
 		},
 	}
 	// index docs
@@ -92,7 +86,7 @@ func main() {
 	}
 
 	// search for some text
-	for _, keyword := range []string{"水果世博园", "你", "first", "中文", "交换机", "交换","富士"} {
+	for _, keyword := range []string{"水果世博园", "你", "first", "中文", "交换机", "交换", "富士"} {
 		query := bleve.NewQueryStringQuery(keyword)
 		search := bleve.NewSearchRequest(query)
 		search.Highlight = bleve.NewHighlight()

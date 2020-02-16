@@ -7,7 +7,6 @@ import (
 
 	"github.com/blevesearch/bleve/analysis"
 	"github.com/blevesearch/bleve/registry"
-	//"github.com/tukdesk/sego"
 	"github.com/huichen/sego"
 )
 
@@ -22,12 +21,10 @@ var (
 )
 
 type SegoTokenizer struct {
-	segmenter     *sego.Segmenter
-	nested        bool
-	//caseSensitive bool
+	segmenter *sego.Segmenter
+	nested    bool
 }
 
-//func NewSegoTokenizer(dictFiles string, nested, caseSensitive bool) (*SegoTokenizer, error) {
 func NewSegoTokenizer(dictFiles string, nested bool) (*SegoTokenizer, error) {
 	segmenter, err := getSegoSegmenter(dictFiles)
 	if err != nil {
@@ -35,9 +32,8 @@ func NewSegoTokenizer(dictFiles string, nested bool) (*SegoTokenizer, error) {
 	}
 
 	return &SegoTokenizer{
-		segmenter:     segmenter,
-		nested:        nested,
-		//caseSensitive: caseSensitive,
+		segmenter: segmenter,
+		nested:    nested,
 	}, nil
 }
 
@@ -45,7 +41,6 @@ func (this *SegoTokenizer) Tokenize(b []byte) analysis.TokenStream {
 	stream := make(analysis.TokenStream, 0)
 	pos := 1
 
-	//segments := this.segmenter.SegmentAdv(b, false, this.caseSensitive)
 	segments := this.segmenter.InternalSegment(b, false)
 	for _, segment := range segments {
 		p := &segment
@@ -102,13 +97,6 @@ func SegoTokenizerConstructor(config map[string]interface{}, cache *registry.Cac
 	if !ok {
 		nested = true
 	}
-
-	//caseSensitive, ok := config["case"].(bool)
-	//if !ok {
-	//	caseSensitive = true
-	//}
-
-	//return NewSegoTokenizer(dictFiles, nested, caseSensitive)
 	return NewSegoTokenizer(dictFiles, nested)
 }
 

@@ -7,8 +7,6 @@ import (
 	"github.com/blevesearch/bleve/registry"
 )
 
-//const Name = "sego"
-
 func NewAnalyzer(config map[string]interface{}, cache *registry.Cache) (*analysis.Analyzer, error) {
 	tokenizerName, ok := config["tokenizer"].(string)
 	if !ok {
